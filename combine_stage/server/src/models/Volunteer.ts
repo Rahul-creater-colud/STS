@@ -1,0 +1,3 @@
+import { model, Schema } from 'mongoose'; import { withIdTransform } from './base.js';
+const schema=withIdTransform(new Schema({name:{type:String,required:true},phone:{type:String,required:true},vehicleType:{type:String,enum:['Electric Two-Wheeler','Motorcycle','Cargo Van','Auto Rickshaw','Car'],required:true},vehicleNumber:{type:String,required:true},rating:{type:Number,min:0,max:5,default:5},completedRescues:{type:Number,default:0},status:{type:String,enum:['Available','On Active Rescue','Offline'],default:'Available'},currentLocation:{lat:{type:Number,required:true},lng:{type:Number,required:true},area:{type:String,required:true}},activeRescueId:String}));
+schema.index({status:1}); export default model<any>('Volunteer',schema);

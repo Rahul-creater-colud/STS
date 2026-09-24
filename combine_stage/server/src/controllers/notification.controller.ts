@@ -1,0 +1,4 @@
+import type {Request,Response,NextFunction} from 'express'; import AppNotification from '../models/AppNotification.js'; import {data,json,jsonList} from './helpers.js'; import {HttpError} from '../middleware/errorHandler.js';
+export async function listNotifications(_req:Request,res:Response,next:NextFunction){try{data(res,jsonList(await AppNotification.find().sort({timestamp:-1})));}catch(e){next(e);}}
+export async function markRead(req:Request,res:Response,next:NextFunction){try{const n=await AppNotification.findByIdAndUpdate(req.params.id,{$set:{read:true}},{new:true});if(!n)throw new HttpError(404,'Notification not found');data(res,json(n));}catch(e){next(e);}}
+export async function markAllRead(_req:Request,res:Response,next:NextFunction){try{await AppNotification.updateMany({read:false},{$set:{read:true}});data(res,{updated:true});}catch(e){next(e);}}

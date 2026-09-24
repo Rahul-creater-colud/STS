@@ -1,0 +1,13 @@
+{
+  "name": "surplus-to-shelter",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix server",
+    "dev": "concurrently -n FRONTEND,BACKEND -c cyan,green \"npm run dev --prefix frontend\" \"npm run dev --prefix server\"",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm run dev --prefix server",
+    "seed": "npm run seed --prefix server",
+    "build": "npm run build --prefix frontend"
+  },
+  "devDependencies": { "concurrently": "^9.0.0" }
+}

@@ -1,0 +1,8 @@
+openapi: 3.0.3
+info: { title: Surplus-to-Shelter API, version: 1.0.0 }
+servers: [{ url: http://localhost:3000/api }]
+paths:
+  /health: { get: { responses: { '200': { description: API health } } } }
+  /auth/login: { post: { responses: { '200': { description: JWT token } } } }
+  /donations: { get: { responses: { '200': { description: Donations } } }, post: { responses: { '201': { description: Donation created } } } }
+  /stream: { get: { responses: { '200': { description: Server-sent event stream } } } }

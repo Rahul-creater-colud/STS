@@ -1,0 +1,2 @@
+import type {Request,Response,NextFunction} from 'express'; import Volunteer from '../models/Volunteer.js'; import {data,json,jsonList} from './helpers.js';
+export async function listVolunteers(req:Request,res:Response,next:NextFunction){try{const q:Record<string,string>={};if(typeof req.query.status==='string')q.status=String(req.query.status);const rows=await Volunteer.find(q);data(res,rows.map(row=>{const value=json(row) as Record<string,unknown>;if(res.locals.authUser.role!=='admin')delete value.phone;return value;}));}catch(e){next(e);}}
